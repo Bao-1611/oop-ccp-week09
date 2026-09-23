@@ -127,3 +127,19 @@ void updateFoodInfo(Restaurant &res) {
     }
     cout << "Khong tim thay mon an voi ma nay!\n";
 }
+
+// Chuc nang 7: Kiem tra mon an co ton tai va du so luong khong
+int checkFoodAvailability(const Restaurant &res, string foodId, int reqQty) {
+    for (int i = 0; i < res.foodCount; i++) {
+        if (res.foods[i].id == foodId) {
+            if (res.foods[i].quantity >= reqQty) {
+                return i; // Ton tai va du so luong
+            } else {
+                cout << "=> LOI: Số lượng tồn kho không đủ (Chỉ còn " << res.foods[i].quantity << ")\n";
+                return -1;
+            }
+        }
+    }
+    cout << "=> LOI: Không tìm thấy món ăn có mã " << foodId << "\n";
+    return -1;
+}
