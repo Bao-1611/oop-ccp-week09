@@ -66,3 +66,18 @@ void addFood(Restaurant &res) {
     res.foodCount++;
     cout << "=> Them mon an thanh cong!\n";
 }
+
+// Chuc nang 3: Hien thi danh sach mon an
+void displayFoods(const Restaurant &res) {
+    cout << "\n=== DANH SACH MON AN ===\n";
+    if (res.foodCount == 0) {
+        cout << "(Chua co mon an nao trong danh sach)\n";
+        return;
+    }
+    for (int i = 0; i < res.foodCount; i++) {
+        cout << i + 1 << ". [Ma: " << res.foods[i].id << "] " 
+             << res.foods[i].name 
+             << " | Gia: " << res.foods[i].price << " VNĐ"
+             << " | Con lai: " << res.foods[i].quantity << "\n";
+    }
+}
