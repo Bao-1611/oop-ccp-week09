@@ -210,3 +210,25 @@ void displayOrders(const Restaurant &res) {
              << " | Trang thai: " << res.orders[i].status << "\n";
     }
 }
+
+// Chuc nang 10: Tim don hang theo ma
+void searchOrder(const Restaurant &res) {
+    string id;
+    cout << "\n=== 10. TIM DON HANG THEO MA ===\n";
+    cout << "Nhap ma don hang can tim: ";
+    cin >> id;
+
+    for (int i = 0; i < res.orderCount; i++) {
+        if (res.orders[i].id == id) {
+            cout << "-> Tim thay don hang:\n";
+            cout << "   - Ma DH: " << res.orders[i].id << "\n";
+            cout << "   - Khach hang: " << res.orders[i].customerName << "\n";
+            cout << "   - Dia chi: " << res.orders[i].address << "\n";
+            cout << "   - Mon dat: " << res.orders[i].food.name << " (x" << res.orders[i].quantity << ")\n";
+            cout << "   - Tong tien: " << calculateOrderTotal(res.orders[i]) << " VNĐ\n";
+            cout << "   - Trang thai: " << res.orders[i].status << "\n";
+            return;
+        }
+    }
+    cout << "Khong tim thay don hang co ma nay!\n";
+}
