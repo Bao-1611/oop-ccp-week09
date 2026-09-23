@@ -100,3 +100,30 @@ void searchFood(const Restaurant &res) {
     }
     if (!found) cout << "Khong tim thay mon an phu hop!\n";
 }
+
+// Chuc nang 5: Cap nhat gia hoac so luong mon an
+void updateFoodInfo(Restaurant &res) {
+    string id;
+    cout << "\nNhap ma mon an can cap nhat: ";
+    cin >> id;
+
+    for (int i = 0; i < res.foodCount; i++) {
+        if (res.foods[i].id == id) {
+            cout << "1. Cap nhat don gia\n";
+            cout << "2. Cap nhat so luong con lai\n";
+            cout << "Chon tuy chon (1-2): ";
+            int opt;
+            cin >> opt;
+            if (opt == 1) {
+                cout << "Nhap don gia moi: ";
+                cin >> res.foods[i].price;
+            } else if (opt == 2) {
+                cout << "Nhap so luong moi: ";
+                cin >> res.foods[i].quantity;
+            }
+            cout << "=> Cap nhat thanh cong!\n";
+            return;
+        }
+    }
+    cout << "Khong tim thay mon an voi ma nay!\n";
+}
