@@ -195,3 +195,18 @@ void createOrder(Restaurant &res) {
     cout << "=> Tao don hang thanh cong!\n";
     cout << "=> Tong tien don hang: " << calculateOrderTotal(ord) << " VNĐ\n";
 }
+
+// Chuc nang 9: Hien thi danh sach cac don hang
+void displayOrders(const Restaurant &res) {
+    cout << "\n=== 9. DANH SACH DON HANG ===\n";
+    if (res.orderCount == 0) {
+        cout << "(Chua co don hang nao)\n";
+        return;
+    }
+    for (int i = 0; i < res.orderCount; i++) {
+        cout << i + 1 << ". [Ma DH: " << res.orders[i].id << "] Khach: " << res.orders[i].customerName
+             << " | Mon: " << res.orders[i].food.name << " (x" << res.orders[i].quantity << ")"
+             << " | Tong tien: " << calculateOrderTotal(res.orders[i]) << " VNĐ"
+             << " | Trang thai: " << res.orders[i].status << "\n";
+    }
+}
