@@ -143,3 +143,55 @@ int checkFoodAvailability(const Restaurant &res, string foodId, int reqQty) {
     cout << "=> LOI: Không tìm thấy món ăn có mã " << foodId << "\n";
     return -1;
 }
+
+// Chuc nang 8: Tinh tong tien cua don hang
+double calculateOrderTotal(const Order &ord) {
+    return ord.food.price * ord.quantity;
+}
+
+// Chuc nang 6: Tao don hang moi
+void createOrder(Restaurant &res) {
+    if (res.orderCount >= 100) {
+        cout << "Danh sach don hang da day!\n";
+        return;
+    }
+
+    Order ord;
+    string foodId;
+    int qty;
+
+    cout << "\n=== 6. TAO DON HANG MOI ===\n";
+    cout << "Nhap ma don hang: ";
+    cin >> ord.id;
+    
+    cout << "Nhap ma mon an muon dat: ";
+    cin >> foodId;
+    cout << "Nhap so luong dat: ";
+    cin >> qty;
+
+    // Dung Chuc nang 7
+    int foodIndex = checkFoodAvailability(res, foodId, qty);
+    if (foodIndex == -1) {
+        cout << "=> Tao don hang THAT BAI!\n";
+        return;
+    }
+
+    ord.food = res.foods[foodIndex];
+    ord.quantity = qty;
+    res.foods[foodIndex].quantity -= qty;
+
+    cin.ignore();
+    cout << "Nhap ten khach hang: ";
+    getline(cin, ord.customerName);
+    cout << "Nhap dia chi giao hang: ";
+    getline(cin, ord.address);
+    
+    ord.status = "Pending";
+
+    res.orders[res.orderCount] = ord;
+    res.orderCount++;
+
+    // Dung Chuc nang 8
+    cout << "=> Tao don hang thanh cong!\n";
+    cout << "=> Tong tien don hang: " << calculateOrderTotal(ord) << " VNĐ\n";
+}
