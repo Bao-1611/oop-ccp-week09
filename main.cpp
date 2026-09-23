@@ -81,3 +81,22 @@ void displayFoods(const Restaurant &res) {
              << " | Con lai: " << res.foods[i].quantity << "\n";
     }
 }
+
+// Chuc nang 4: Tim mon an theo ma hoac ten
+void searchFood(const Restaurant &res) {
+    cin.ignore();
+    string key;
+    cout << "\nNhap ma hoac ten mon an can tim: ";
+    getline(cin, key);
+
+    bool found = false;
+    for (int i = 0; i < res.foodCount; i++) {
+        if (res.foods[i].id == key || res.foods[i].name.find(key) != string::npos) {
+            cout << "Tim thay: [Ma: " << res.foods[i].id << "] " 
+                 << res.foods[i].name << " - Gia: " << res.foods[i].price 
+                 << " - So luong: " << res.foods[i].quantity << "\n";
+            found = true;
+        }
+    }
+    if (!found) cout << "Khong tim thay mon an phu hop!\n";
+}
