@@ -232,3 +232,42 @@ void searchOrder(const Restaurant &res) {
     }
     cout << "Khong tim thay don hang co ma nay!\n";
 }
+
+// Chuc nang 11: Cap nhat trang thai don hang
+void updateOrderStatus(Restaurant &res) {
+    string id;
+    cout << "\n=== 11. CAP NHAT TRANG THAI DON HANG ===\n";
+    cout << "Nhap ma don hang can cap nhat: ";
+    cin >> id;
+
+    for (int i = 0; i < res.orderCount; i++) {
+        if (res.orders[i].id == id) {
+            cout << "Chon trang thai moi:\n";
+            cout << "1. Pending (Dang xu ly)\n";
+            cout << "2. Completed (Da hoan thanh)\n";
+            cout << "3. Cancelled (Da huy)\n";
+            cout << "Chon (1-3): ";
+            int st;
+            cin >> st;
+            
+            if (st == 1) {
+                res.orders[i].status = "Pending";
+            } else if (st == 2) {
+                res.orders[i].status = "Completed";
+            } else if (st == 3) {
+                if (res.orders[i].status != "Cancelled") {
+                    for (int j = 0; j < res.foodCount; j++) {
+                        if (res.foods[j].id == res.orders[i].food.id) {
+                            res.foods[j].quantity += res.orders[i].quantity; // Hoan tra so luong mon an ve kho
+                            break;
+                        }
+                    }
+                }
+                res.orders[i].status = "Cancelled";
+            }
+            cout << "=> Cap nhat trang thai thanh cong!\n";
+            return;
+        }
+    }
+    cout << "Khong tim thay don hang co ma nay!\n";
+}
